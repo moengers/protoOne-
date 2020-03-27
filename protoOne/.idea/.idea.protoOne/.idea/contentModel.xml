@@ -7,18 +7,19 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
-          <e p="GridPlacment" t="Include">
+          <e p="GridPlacement" t="Include">
             <e p="PlaceOnGridData.cs" t="Include" />
+            <e p="PlaceOnGridSystem.cs" t="Include" />
           </e>
           <e p="rotate" t="Include">
             <e p="MassiveSpawnerData.cs" t="Include" />
             <e p="MassivSpawnerSystem.cs" t="Include" />
             <e p="RotateData.cs" t="Include" />
             <e p="RotateSystem.cs" t="Include" />
+            <e p="ShowCount.cs" t="Include" />
           </e>
           <e p="SimpleCameraController.cs" t="Include" />
         </e>
-        <e p="ShowCount.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />

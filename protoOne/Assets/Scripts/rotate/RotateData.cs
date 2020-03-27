@@ -1,5 +1,4 @@
-﻿
-using Unity.Entities;
+﻿using Unity.Entities;
 
 namespace RotationPrototype
 {
@@ -7,8 +6,6 @@ namespace RotationPrototype
     public struct RotateData : IComponentData
     {
         public float speed;
-
     }
-
 }
 

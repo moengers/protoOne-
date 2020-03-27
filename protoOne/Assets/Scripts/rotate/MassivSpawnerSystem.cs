@@ -13,14 +13,7 @@ namespace RotationPrototype
     {
         EndSimulationEntityCommandBufferSystem m_EndSimulationEcbSystem;
         private int i = 1;
-        protected override void OnCreate()
-        {
-            base.OnCreate();
-            // Find the ECB system once and store it for later usage
-            m_EndSimulationEcbSystem = World
-                .GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
-        }
-    
+
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
 
