@@ -12,6 +12,10 @@
             <e p="PlaceOnGridData.cs" t="Include" />
             <e p="PlaceOnGridSystem.cs" t="Include" />
           </e>
+          <e p="Input" t="Include">
+            <e p="InputMaster.cs" t="Include" />
+            <e p="InputTest.cs" t="Include" />
+          </e>
           <e p="rotate" t="Include">
             <e p="MassiveSpawnerData.cs" t="Include" />
             <e p="MassivSpawnerSystem.cs" t="Include" />

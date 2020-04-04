@@ -6,18 +6,21 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GridPlacement
 {
     [AlwaysSynchronizeSystem]
     public class PlaceOnGridSystem : JobComponentSystem
     {
+        
+        InputMaster inputMaster = new InputMaster();
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
 
             Entities.ForEach((ref Translation translation, in PlaceOnGridData placeOnGridData) =>
             {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 RaycastHit hit;
                 var gridSize = placeOnGridData.gridSize;
                 var gridSizeD2 = gridSize / 2;
