@@ -6,7 +6,7 @@ namespace GridPlacement
     [GenerateAuthoringComponent]
     public struct PlaceOnGridData : IComponentData
     {
-        public float gridSize;
+        public float gridSize;  
     }
 }
 

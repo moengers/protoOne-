@@ -17,20 +17,50 @@ namespace GridPlacement
         InputMaster inputMaster = new InputMaster();
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
+            var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            Entities.ForEach((ref Translation translation, in PlaceOnGridData placeOnGridData) =>
+            Entities.ForEach((ref Translation translation, in PlaceOnGridData placeOnGridData, in NonUniformScale scale) =>
             {
-                var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 RaycastHit hit;
                 var gridSize = placeOnGridData.gridSize;
                 var gridSizeD2 = gridSize / 2;
+                
+                bool isEvenX = (scale.Value.x % 2 == 0);
+                bool isEvenZ = (scale.Value.z % 2 == 0);
+                
+                //Calc new Position:
                 if (Physics.Raycast(ray, out hit))
                 {
-                    //Debug.Log("Hit");
                     var newPosition = (float3)hit.point;
-                    newPosition.y = 0.5f;
-                    newPosition.x = Rounder.RoundToNearest(newPosition.x + gridSizeD2, gridSize) - gridSizeD2;
-                    newPosition.z = Rounder.RoundToNearest(newPosition.z + gridSizeD2, gridSize) - gridSizeD2;
+                    newPosition.y += scale.Value.y * 0.5f;
+                    if (isEvenX)
+                    {
+                        if (isEvenZ)
+                        {
+                            newPosition.x = Rounder.RoundToNearest(newPosition.x, gridSize);
+                            newPosition.z = Rounder.RoundToNearest(newPosition.z, gridSize);
+                        }
+                        else
+                        {
+                            newPosition.x = Rounder.RoundToNearest(newPosition.x, gridSize);
+                            newPosition.z = Rounder.RoundToNearest(newPosition.z + gridSizeD2, gridSize) - gridSizeD2;
+                        }
+                    }
+                    else
+                    {
+                        if (isEvenZ)
+                        {
+                            newPosition.x = Rounder.RoundToNearest(newPosition.x + gridSizeD2, gridSize) - gridSizeD2;
+                            newPosition.z = Rounder.RoundToNearest(newPosition.z, gridSize);
+                        }
+                        else
+                        {
+                            newPosition.x = Rounder.RoundToNearest(newPosition.x + gridSizeD2, gridSize) - gridSizeD2;
+                            newPosition.z = Rounder.RoundToNearest(newPosition.z + gridSizeD2, gridSize) - gridSizeD2;
+                        }
+                    }
+                    
+                    //Set new Position
                     translation.Value.xyz = newPosition;
                 }
             }).WithStructuralChanges().Run();

@@ -38,8 +38,11 @@ namespace RotationPrototype
                         Value = new float3(rand.NextFloat(-10f, 10f), rand.NextFloat(-10f, 10f), rand.NextFloat(-10f, 10f))
                     });
                 }
-            
-                Debug.Log("For: " + i);
+
+                if (i % 1000 == 0)
+                {
+                    Debug.Log("For: " + i);
+                }
             
 
             }).WithStructuralChanges().Run();
